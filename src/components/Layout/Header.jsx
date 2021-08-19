@@ -7,7 +7,7 @@ const Header = (props) => {
     <div>
       <header className={classes.header}>
         <h1>React Meals</h1>
-        <HeaderCartButton />
+        <HeaderCartButton showModal={props.showModal} />
       </header>
       <div className={classes['main-image']}>
         <img src={mealsImg} alt='meals-pic' />
