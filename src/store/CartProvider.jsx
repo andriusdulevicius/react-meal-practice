@@ -6,19 +6,34 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
+// PAGRINDINE REDUCER FUNKCIJA
 const cartReducer = (state, action) => {
   // state = cartState
-  return defaultCartState;
+  switch (action.type) {
+    case 'ADD':
+      const { item } = action;
+      const updatedItems = [...state.items, item];
+      const updatedAmount = state.totalAmount + item.price * item.amount;
+      return { items: updatedItems, totalAmount: updatedAmount };
+    case 'REMOVE':
+      const updatedItemsAfterRemove = [...state.items].filter((i) => i.id !== action.id);
+      const removedItem = [...state.items].filter((i) => i.id === action.id);
+      const updatedAmountRemove = state.totalAmount - removedItem.price;
+
+      return { items: updatedItemsAfterRemove, totalAmount: updatedAmountRemove };
+    default:
+      return state;
+  }
 };
 
 const CartProvider = (props) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
   const addItemToCartHandler = (item) => {
-    console.log('adding item');
+    dispatchCartAction({ type: 'ADD', item });
   };
   const removeItemFromCartHandler = (id) => {
-    console.log('removing item');
+    dispatchCartAction({ type: 'REMOVE', id });
   };
 
   const cartContext = {
