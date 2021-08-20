@@ -6,13 +6,13 @@ import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [modalState, setModalState] = useState(false);
   const showModalHandler = () => {
-    setShowModal(!showModal);
+    setModalState(!modalState);
   };
   return (
     <div className='App'>
-      <Cart showModal={showModalHandler} modalState={showModal} />
+      {modalState && <Cart showModal={showModalHandler} />}
       <Header showModal={showModalHandler} />
       <main>
         <Meals />

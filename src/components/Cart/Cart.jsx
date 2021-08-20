@@ -10,23 +10,21 @@ const Cart = ({ modalState, showModal }) => {
     </ul>
   );
   return (
-    <>
-      {modalState && (
-        <Modal>
-          {cartItems}
-          <div className={classes.total}>
-            <span>Total Amount </span>
-            <span>$39.99 </span>
-          </div>
-          <div className={classes.actions}>
-            <button onClick={showModal} className={classes['button--alt']}>
-              Close
-            </button>
-            <button className={classes['button']}>Order</button>
-          </div>
-        </Modal>
-      )}
-    </>
+    <Modal onClick={showModal}>
+      {cartItems}
+      <div className={classes.total}>
+        <span>Total Amount </span>
+        <span>$39.99 </span>
+      </div>
+      <div className={classes.actions}>
+        <button onClick={showModal} className={classes['button--alt']}>
+          Close
+        </button>
+        <button onClick={showModal} className={classes['button']}>
+          Order
+        </button>
+      </div>
+    </Modal>
   );
 };
 
