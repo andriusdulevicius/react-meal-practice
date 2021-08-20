@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Cart from './components/Cart/Cart';
 import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
+import CartProvider from './store/CartProvider';
 
 function App() {
   const [modalState, setModalState] = useState(false);
@@ -11,13 +12,13 @@ function App() {
     setModalState(!modalState);
   };
   return (
-    <div className='App'>
+    <CartProvider>
       {modalState && <Cart showModal={showModalHandler} />}
       <Header showModal={showModalHandler} />
       <main>
         <Meals />
       </main>
-    </div>
+    </CartProvider>
   );
 }
 
