@@ -8,6 +8,7 @@ const HeaderCartButton = (props) => {
   const [btnClasses, setBtnClasses] = useState(classes.button);
 
   useEffect(() => {
+    if (cartCtx.items.length === 0) return;
     setBtnClasses(`${classes.button} ${classes.bump}`);
     setTimeout(() => {
       setBtnClasses(classes.button);
