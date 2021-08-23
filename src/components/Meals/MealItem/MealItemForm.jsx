@@ -10,7 +10,7 @@ const MealItemForm = ({ id, onAddItem }) => {
     e.preventDefault();
     setErrMsg('');
     if (inputValue < 1 || inputValue > 5) return setErrMsg('Iveskite tinkama kieki (1-5)!');
-    console.log(inputValue);
+
     onAddItem(+inputValue);
     setInputValue(1);
   };
