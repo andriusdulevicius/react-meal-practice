@@ -14,13 +14,14 @@ const HeaderCartButton = (props) => {
     }, 300);
   }, [cartCtx.items]);
 
+  const totalQty = cartCtx.items.reduce((acc, cur) => acc + cur.amount, 0);
   return (
     <button onClick={props.showModal} className={btnClasses}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>{cartCtx.totalQty}</span>
+      <span className={classes.badge}>{totalQty}</span>
     </button>
   );
 };

@@ -21,13 +21,13 @@ const cartReducer = (state, action) => {
           i.id === item.id ? { ...i, amount: i.amount + item.amount } : i
         );
         const updatedTotalAmount = state.totalAmount + item.price;
-        const updatedQuantity = updatedIncrement.reduce((acc, val) => acc + val.amount, 0);
-        return { items: updatedIncrement, totalAmount: updatedTotalAmount, totalQty: updatedQuantity };
+
+        return { items: updatedIncrement, totalAmount: updatedTotalAmount };
       } else {
         const updatedItems = [...state.items, item];
         const updatedTotalAmount = state.totalAmount + item.price * item.amount;
-        const updatedQuantity = updatedItems.reduce((acc, val) => acc + val.amount, 0);
-        return { items: updatedItems, totalAmount: updatedTotalAmount, totalQty: updatedQuantity };
+
+        return { items: updatedItems, totalAmount: updatedTotalAmount };
       }
     case 'REMOVE':
       const { id } = action;
@@ -38,11 +38,10 @@ const cartReducer = (state, action) => {
           : state.items.filter((i) => i.id !== id);
 
       const updatedAmountRemove = state.totalAmount - foundItem.price;
-      const newQuantity = updatedItemsAfterRemove.reduce((acc, val) => acc + val.amount, 0);
 
-      return { items: updatedItemsAfterRemove, totalAmount: updatedAmountRemove, totalQty: newQuantity };
+      return { items: updatedItemsAfterRemove, totalAmount: updatedAmountRemove };
     case 'ORDER':
-      return { items: [], totalAmount: 0, totalQty: 0 };
+      return { items: [], totalAmount: 0 };
     default:
       return state;
   }
@@ -64,7 +63,6 @@ const CartProvider = (props) => {
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
-    totalQty: cartState.totalQty,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
     orderItems: orderItemsHandler,
