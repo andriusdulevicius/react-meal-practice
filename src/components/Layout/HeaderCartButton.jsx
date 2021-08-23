@@ -6,14 +6,13 @@ import { useContext } from 'react';
 const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
 
-  const numberOfCartItems = cartCtx.items.length;
   return (
     <button onClick={props.showModal} className={classes.button}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>{numberOfCartItems}</span>
+      <span className={classes.badge}>{cartCtx.totalQty}</span>
     </button>
   );
 };

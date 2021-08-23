@@ -3,7 +3,7 @@ import Input from '../../UI/Input';
 import { useState } from 'react';
 
 const MealItemForm = ({ id, onAddItem }) => {
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
   const [errMsg, setErrMsg] = useState('');
 
   const submitHandler = (e) => {
@@ -12,6 +12,7 @@ const MealItemForm = ({ id, onAddItem }) => {
     if (inputValue < 1 || inputValue > 5) return setErrMsg('Iveskite tinkama kieki (1-5)!');
     console.log(inputValue);
     onAddItem(inputValue);
+    setInputValue(1);
   };
 
   return (
@@ -24,8 +25,8 @@ const MealItemForm = ({ id, onAddItem }) => {
         input={{
           id: id,
           type: 'number',
-          // min: 1,
-          // max: 5,
+          min: 1,
+          max: 5,
           step: 1,
         }}
       />

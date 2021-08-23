@@ -1,0 +1,13 @@
+.cart-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cart-item button {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
