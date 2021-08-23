@@ -14,19 +14,21 @@ const cartReducer = (state, action) => {
     case 'ADD':
       const { item } = action;
       const found = state.items.find((i) => i.id === item.id);
-
-      console.log(state.items);
+      // taspats tik findIndex , grazintu indeksa to itemo
 
       if (found) {
-        const updateIncrement = state.items.map((i) => (i.id === item.id ? { ...i, amount: i.amount + 1 } : i));
-        const updatedAmount = state.totalAmount + item.price;
-        const updatedQuantity = updateIncrement.reduce((acc, val) => acc + val.amount, 0);
-        return { items: updateIncrement, totalAmount: updatedAmount, totalQty: updatedQuantity };
+        const updatedIncrement = state.items.map((i) =>
+          i.id === item.id ? { ...i, amount: i.amount + item.amount } : i
+        );
+        const updatedTotalAmount = state.totalAmount + item.price;
+        const updatedQuantity = updatedIncrement.reduce((acc, val) => acc + val.amount, 0);
+        return { items: updatedIncrement, totalAmount: updatedTotalAmount, totalQty: updatedQuantity };
+      } else {
+        const updatedItems = [...state.items, item];
+        const updatedTotalAmount = state.totalAmount + item.price * item.amount;
+        const updatedQuantity = updatedItems.reduce((acc, val) => acc + val.amount, 0);
+        return { items: updatedItems, totalAmount: updatedTotalAmount, totalQty: updatedQuantity };
       }
-      const updatedItems = [...state.items, item];
-      const updatedAmount = state.totalAmount + item.price * item.amount;
-      const updatedQuantity = updatedItems.reduce((acc, val) => acc + val.amount, 0);
-      return { items: updatedItems, totalAmount: updatedAmount, totalQty: updatedQuantity };
     case 'REMOVE':
       const { id } = action;
       const foundItem = state.items.find((i) => i.id === id);

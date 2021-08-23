@@ -8,7 +8,7 @@ const Cart = ({ showModal }) => {
   const cartCtx = useContext(CartContext);
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addItem(item);
+    cartCtx.addItem({ ...item, amount: 1 });
   };
   const onRemoveItem = (id) => {
     cartCtx.removeItem(id);
