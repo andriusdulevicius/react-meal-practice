@@ -6,10 +6,24 @@ import CartItem from './CartItem';
 
 const Cart = ({ showModal }) => {
   const cartCtx = useContext(CartContext);
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem(item);
+  };
+  const onRemoveItem = (id) => {
+    cartCtx.removeItem(id);
+  };
+
   const cartItems = (
     <ul className={classes['cart-items']}>
       {cartCtx.items.map((i) => (
-        <CartItem item={i} cartCtx={cartCtx} />
+        // budas prideti funkcijai argumenta kai jo paprastai negalime prideti
+        <CartItem
+          onAddItem={cartItemAddHandler.bind(null, i)}
+          onRemove={onRemoveItem.bind(null, i.id)}
+          key={i.id}
+          {...i}
+        />
       ))}
     </ul>
   );

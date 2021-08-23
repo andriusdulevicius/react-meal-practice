@@ -1,20 +1,21 @@
 import React from 'react';
 import classes from './CartItem.module.css';
 
-const CartItem = ({ item, cartCtx }) => {
+const CartItem = ({ name, amount, id, price, cartCtx, onRemove, onAddItem }) => {
+  const priceAdj = `$${price.toFixed(2)}`;
   return (
-    <li key={item.id} className={classes['cart-item']}>
+    <li key={id} className={classes['cart-item']}>
       <div>
-        <h2>{item.name}</h2>
+        <h2>{name}</h2>
         <div className={classes.summary}>
-          <span className={classes.price}>{item.price}</span>
-          <span className={classes.amount}>Qty: {item.amount}</span>
+          <span className={classes.price}>{priceAdj}</span>
+          <span className={classes.amount}>Qty: {amount}</span>
         </div>
       </div>
 
       <div className={classes.actions}>
-        <button onClick={() => cartCtx.removeItem(item.id)}>-</button>
-        <button onClick={() => cartCtx.addItem(item)}>+</button>
+        <button onClick={onRemove}>-</button>
+        <button onClick={onAddItem}>+</button>
       </div>
     </li>
   );
