@@ -10,9 +10,12 @@ const HeaderCartButton = (props) => {
   useEffect(() => {
     if (cartCtx.items.length === 0) return;
     setBtnClasses(`${classes.button} ${classes.bump}`);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setBtnClasses(classes.button);
     }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [cartCtx.items]);
 
   const totalQty = cartCtx.items.reduce((acc, cur) => acc + cur.amount, 0);
